@@ -1,7 +1,10 @@
 const body = document.querySelector("body")
 const grid = document.querySelector(".grid");
 let mouseDown = false;
+let lastGridSize = 16;
+
 let colorized = false;
+let eraser = false;
 
 
 function createGrid(gridHeigth, gridWidth) {
@@ -45,6 +48,17 @@ function getDarkerColors(colorArr) {
 }
 
 function paint(target) {
+    if (eraser) {
+        if (colorized) {
+            target.style.backgroundColor = "rgb(250, 235, 215)";
+            return;
+        }
+        target.style.backgroundColor = "rgb(102, 126, 88)";
+        return;
+    }
+    if (colorized) {
+        return;
+    }
     target.style.backgroundColor = getDarkerColors(parseColor(getComputedStyle(target).backgroundColor));
 }
 
@@ -84,6 +98,7 @@ sizeInput.addEventListener("keydown", (event) => {
     if (event.key != "Enter") {
         return;
     };
+    lastGridSize = event.target.value;
     let gridWidth = event.target.value;
     let gridHeigth = event.target.value;
     deleteGrid();
@@ -91,5 +106,24 @@ sizeInput.addEventListener("keydown", (event) => {
     sizeInput.value = "";
 });
 
-//
+//---------------------Toolbar
+
+const toolBarButtons = document.querySelector(".button-tools");
+const eraserButton = document.querySelector("#eraser");
+const clearButton = document.querySelector("#clear");
+
+toolBarButtons.addEventListener("click", (event) => {
+    switch (event.target) {
+        
+        case eraserButton:
+            eraser = !eraser;
+            break;
+        
+        case clearButton:
+            deleteGrid();
+            createGrid(lastGridSize, lastGridSize);
+            break;
+    }
+});
+
 createGrid(16, 16);
