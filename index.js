@@ -141,7 +141,7 @@ toolBarButtons.addEventListener("click", (event) => {
     
         case paintButton:
             colorized = true;
-            erase = false;
+            eraser = false;
             colorPicker.style.display = "block";
             resetGrid();
             break;
