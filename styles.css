@@ -1,0 +1,45 @@
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(59, 59, 59);
+    align-items: center;
+}
+
+main {
+    display: flex;
+}
+
+.grid {
+    width: 50vw;
+    aspect-ratio: 1 / 1;
+    height: auto;
+}
+
+.square {
+    aspect-ratio: 1 / 1;;
+    margin: 0;
+    border-width: 0.5px;
+    border-style: dotted;
+}
+
+.sketchable {
+    background-color: rgb(102, 126, 88);
+}
+
+.paintable {
+    background-color: antiquewhite;
+}
+
+.grid-row {
+    width: 100%;
+    display: flex;
+}
+
+.toolkit {
+    display: column;
+    flex-direction: column;
+}
+
+.button-row {
+    display: flex;
+}
