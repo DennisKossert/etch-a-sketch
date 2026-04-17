@@ -27,7 +27,7 @@ main {
 }
 
 .paintable {
-    background-color: antiquewhite;
+    background-color: rgb(250, 235, 215);
 }
 
 .grid-row {
@@ -42,4 +42,8 @@ main {
 
 .button-row {
     display: flex;
+}
+
+#color-picker {
+    display: none;
 }

@@ -5,6 +5,7 @@ let lastGridSize = 16;
 
 let colorized = false;
 let eraser = false;
+let chosenColor = "rgb(255, 0, 0)"
 
 
 function createGrid(gridHeigth, gridWidth) {
@@ -57,11 +58,16 @@ function paint(target) {
         return;
     }
     if (colorized) {
+        target.style.backgroundColor = chosenColor;
         return;
     }
     target.style.backgroundColor = getDarkerColors(parseColor(getComputedStyle(target).backgroundColor));
 }
 
+function resetGrid() {
+    deleteGrid();
+    createGrid(lastGridSize, lastGridSize);
+}
 //Painting---------------------------------------------
 grid.addEventListener("mouseover", (event) => {
 
@@ -111,6 +117,9 @@ sizeInput.addEventListener("keydown", (event) => {
 const toolBarButtons = document.querySelector(".button-tools");
 const eraserButton = document.querySelector("#eraser");
 const clearButton = document.querySelector("#clear");
+const sketchButton = document.querySelector("#sketch");
+const paintButton = document.querySelector("#paint");
+const colorPicker = document.querySelector("#color-picker")
 
 toolBarButtons.addEventListener("click", (event) => {
     switch (event.target) {
@@ -120,10 +129,28 @@ toolBarButtons.addEventListener("click", (event) => {
             break;
         
         case clearButton:
-            deleteGrid();
-            createGrid(lastGridSize, lastGridSize);
+            resetGrid();
+            break;
+        
+        case sketchButton:
+            colorized = false;
+            eraser = false;
+            colorPicker.style.display = "none";
+            resetGrid();
+            break;
+    
+        case paintButton:
+            colorized = true;
+            erase = false;
+            colorPicker.style.display = "block";
+            resetGrid();
             break;
     }
 });
+
+colorPicker.addEventListener("change", (event) => {
+    chosenColor = event.target.value;
+    eraser = false;
+})
 
 createGrid(16, 16);
